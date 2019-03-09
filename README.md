@@ -4,17 +4,18 @@ This package focuses on clustering map markers in an efficient way by dividing t
 ### instruction
 
 #### Getting Started
-Require the package in your project with the following command:
-`
-composer require larafa/clustering 
-`
+Require the package in your project with the following command with composer:
+
+```
+$ composer require waxwink/clustering 
+```
 #### Usage
 The usage is pretty straight forward:
-`
-<?php
+
+```php
 require __DIR__.'/vendor/autoload.php';
 
-use Larafa\Clustering\Clustering;
+use Waxwink\Clustering\Clustering;
 
 $points = [
 	[
@@ -34,6 +35,8 @@ $points = [
 		'lng' => 51.530846
 	],
 ];
+
+
 $output = Clustering::getClusters($points, 0.1);
 //output :
 /*
@@ -54,6 +57,8 @@ array (size=3)
       'lng' => float 51.530846
       'total' => int 1
 */
+
+
 $output = Clustering::getClusters($points, 0.15);
 //output :
 /*
@@ -69,6 +74,8 @@ array (size=2)
       'lng' => float 51.530846
       'total' => int 1
  */
+ 
+ 
  $output = Clustering::getClusters($points, 0.2);
 //output :
 /*
