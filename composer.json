@@ -1,0 +1,21 @@
+{
+    "name": "larafa/clustering",
+    "description": "This is used to cluster map points",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamadreza Pishdad",
+            "email": "mrpishdad@live.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Waxwink\\Clustering\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^5.7",
+        "ext-bcmath": "*"
+    }
+}
