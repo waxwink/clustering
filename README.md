@@ -1,5 +1,5 @@
 ## Clustering
-This package focuses on clustering map markers in an efficient way by dividing the map in defined square spaces ($d) and assign each point to its own space.
+This package focuses on clustering map markers in an efficient way by dividing the map in defined square spaces and assign each point to its own space.
 
 ### instruction
 
@@ -38,6 +38,7 @@ $points = [
 
 
 $output = Clustering::getClusters($points, 0.1);
+//The second parameter is the length of the square spaces by which the points are going to be clusterd.
 //output :
 /*
 array (size=3)
