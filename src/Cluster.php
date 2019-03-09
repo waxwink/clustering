@@ -4,8 +4,7 @@
 namespace Waxwink\Clustering;
 
 
-
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class Cluster extends Point
 {
