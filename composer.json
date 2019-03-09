@@ -1,5 +1,5 @@
 {
-    "name": "larafa/clustering",
+    "name": "waxwink/clustering",
     "description": "This is used to cluster map points",
     "type": "composer-plugin",
     "license": "MIT",
