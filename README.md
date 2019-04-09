@@ -75,6 +75,7 @@ $output = Clustering::getClusters($points, 2, Clustering::K_MEANS_ALGORITHM, 5);
 
 
 //output:
+/*
 array (size=2)
   0 => 
     array (size=3)
@@ -86,4 +87,5 @@ array (size=2)
       'lat' => float 35.712801
       'lng' => float 51.442927666667
       'total' => int 3
+*/
 ```
