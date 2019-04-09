@@ -3,7 +3,9 @@
 namespace Waxwink\Clustering;
 
 
-class Clusters
+use Waxwink\Clustering\Contracts\ClusterMaker;
+
+class Clusters implements ClusterMaker
 {
     protected $main_cluster;
     protected $radius;
@@ -38,8 +40,16 @@ class Clusters
         });
 
 
+        $new_clusters = [];
+        foreach ($clusters as $values) {
+            foreach ($values as $cluster) {
+                $new_clusters[] = $cluster;
+            }
+        }
 
-        return $clusters;
+
+
+        return $new_clusters;
     }
 
 }

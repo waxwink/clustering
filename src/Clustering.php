@@ -15,21 +15,38 @@ class Clustering
 {
     protected $processes = [];
 
+    const SQUARING_ALGORITHM = 0;
+    const K_MEANS_ALGORITHM = 1;
+
+    protected static $algorithm = self::K_MEANS_ALGORITHM;
+
     const VALUES_NOT_ARRAY = 'The values in the points array should be array';
     const LAT_KEY_REQUIRED = 'The points should have a lat key';
     const LNG_KEY_REQUIRED = 'The points should have a lng key';
 
-    public static function getClusters(Array $points, $radius)
+    public static function getClusters(Array $points, $param, $algorithm = self::SQUARING_ALGORITHM, $iteration = 5)
     {
+        self::$algorithm = $algorithm;
         //prepare points
         $newPoints = self::preparePoints($points);
 
         //make a master cluster with points
         $cluster = new Cluster($newPoints);
 
-        // and split it
-        $maker = new Clusters($cluster, $radius);
-        $clusters = $maker->make();
+        if(self::$algorithm == self::SQUARING_ALGORITHM){
+            $radius = $param;
+            // split it
+            $maker = new Clusters($cluster, $radius);
+            $clusters = $maker->make();
+        }
+
+        if(self::$algorithm == self::K_MEANS_ALGORITHM){
+            $n = $param;
+            // send it to k-means clustering class
+            $maker = new Kmeans($cluster, $n, $iteration );
+            $clusters = $maker->make();
+        }
+
 
         //prepare the output points
         return self::prepareOutputs($clusters);
@@ -85,15 +102,14 @@ class Clustering
     protected static function prepareOutputs(array $clusters)
     {
         $output_points = [];
-        foreach ($clusters as $values) {
-            foreach ($values as $cluster) {
-                $cluster->refresh();
-                $output_points[] = [
-                    'lat' => $cluster->x,
-                    'lng' => $cluster->y,
-                    'total' => $cluster->getTotal()
-                ];
-            }
+        foreach ($clusters as $cluster) {
+            $cluster->refresh();
+            $output_points[] = [
+                'lat' => $cluster->x,
+                'lng' => $cluster->y,
+                'total' => $cluster->getTotal()
+            ];
+
         }
         return $output_points;
     }

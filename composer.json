@@ -1,6 +1,6 @@
 {
     "name": "waxwink/clustering",
-    "description": "This is used to cluster map points",
+    "description": "Clustering map points with K-means or space dividing",
     "license": "MIT",
     "authors": [
         {

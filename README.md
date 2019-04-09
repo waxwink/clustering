@@ -35,8 +35,10 @@ $points = [
 		'lng' => 51.530846
 	],
 ];
+```
 
-
+For dividing the space into equal areas and cluster the points by the spaces you can use the following format:
+```php
 $output = Clustering::getClusters($points, 0.1);
 //The second parameter is the length of the square spaces by which the points are going to be clusterd.
 //output :
@@ -58,33 +60,25 @@ array (size=3)
       'lng' => float 51.530846
       'total' => int 1
 */
+```
+Another option for clustering is the K-means algorithm in which the number of requested clusters is required. This approach is slower in performance but gives accurate clusters.
+```php
+$output = Clustering::getClusters($points, 2, Clustering::K_MEANS_ALGORITHM, 5);
+//the second parameter is the number of clusters
+//the third parameter is the algorithm
+//the forth parameter is the number of iterations used in the K-means algorithm which is 5 by default
 
 
-$output = Clustering::getClusters($points, 0.15);
-//output :
-/*
+//output:
 array (size=2)
   0 => 
     array (size=3)
-      'lat' => float 35.738596
-      'lng' => float 51.408441666667
-      'total' => int 3
+      'lat' => float 35.821006
+      'lng' => float 51.427388
+      'total' => int 1
   1 => 
     array (size=3)
-      'lat' => float 35.743621
-      'lng' => float 51.530846
-      'total' => int 1
- */
- 
- 
- $output = Clustering::getClusters($points, 0.2);
-//output :
-/*
-array (size=1)
-  0 => 
-    array (size=3)
-      'lat' => float 35.73985225
-      'lng' => float 51.43904275
-      'total' => int 4
- */
-`
+      'lat' => float 35.712801
+      'lng' => float 51.442927666667
+      'total' => int 3
+```

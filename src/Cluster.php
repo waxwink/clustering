@@ -14,10 +14,6 @@ class Cluster extends Point
      */
     protected $points;
 
-    /**
-     * @var Cluster
-     */
-    protected $parent_cluster;
     protected $boundaries;
 
     /**
@@ -37,6 +33,8 @@ class Cluster extends Point
         if ($setBountries){
             $this->setBoundaries();
         }
+
+        return $this;
     }
 
     /**
@@ -55,16 +53,39 @@ class Cluster extends Point
     public function __construct(array $points = [])
     {
         $this->setPoints($points);
+        $this->points->keyBy('id');
     }
 
     /**
-     * Adds a point to the points property
+     * Adds a point to the points repository
      *
      * @param Point $point
      */
     public function addPoint(Point $point)
     {
+        if ($point->getParentCluster() !=  null){
+            $point->getParentCluster()->removePoint($point);
+        }
+
         $this->points->add($point);
+        $point->setParentCluster($this);
+        return $this;
+    }
+
+    /**
+     * Removes a point from the points repository
+     *
+     * @param Point $point
+     * @return Cluster
+     */
+    public function removePoint(Point $point)
+    {
+        $key = $this->points->search(function($p) use($point) {
+            return $p->id == $point->id;
+        });
+
+        $this->points->pull($key);
+        return $this;
     }
 
     /**
@@ -91,7 +112,6 @@ class Cluster extends Point
     }
 
     /**
-     * @param $points
      */
     protected function setBoundaries()
     {
@@ -122,6 +142,7 @@ class Cluster extends Point
     /**
      * @param array $points
      * @return Collection
+     * @throws \Exception
      */
     protected function preparePoints(Array $points)
     {
