@@ -1,7 +1,12 @@
+
+![image_2019-03-10_09-19-21](https://user-images.githubusercontent.com/34881789/54081192-d5b08380-4315-11e9-8f78-bf913e8de23c.png)
+
 ## Clustering
 This package focuses on clustering map markers in an efficient way by dividing the map in defined square spaces and assign each point to its own space.
 
 ### instruction
+
+
 
 #### Getting Started
 Require the package in your project with the following command with composer:
